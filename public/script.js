@@ -130,3 +130,34 @@ async function excluirProduto(id) {
 }
 
 carregarProdutos();
+
+async function Testar(url) {
+    const resposta = await fetch(url);
+    const dados = await resposta.json();
+    
+    document.getElementById("status").innerText =
+    "Status recebidos: " + resposta.status;
+
+    document.getElementById("mensagem").innerText =
+    "Mensagem: " + dados.mensagem;
+}
+
+async function TestarPost() {
+    const resposta = await fetch("/Teste/201", {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            nome: "Arroz"
+        })
+    });
+
+    const dados = await resposta.json()
+    
+    document.getElementById("status").innerText =
+    "Status recebidos: " + resposta.status;
+
+    document.getElementById("mensagem").innerText =
+    "Mensagem: " + dados.mensagem;
+}
