@@ -140,22 +140,28 @@ carregarProdutos();
 
 const palavraChave = "gol2026rebaixado";
 
-function palavraChave(...valores) {
-    return valores.some(valor => 
-        valor.trim().toLowerCase().includes(palavraChave)
+function contemPalavraChave(...valores) {
+    return valores.some(valor =>
+        valor.trim().toLowerCase().replace(/\s+/g, "").includes(palavraChave)
     );
 }
-
-
 
 function validarProduto(nome, quantidade, preco) {
     const nomeValido = nome.trim().length > 0;
     const quantidadeValida = /^[0-9]+$/.test(quantidade.trim());
     const precoValido = /^[0-9]+([,.][0-9]{1,2})?$/.test(preco.trim());
 
-    if (palavraChave(nome,quantidade,preco)){
+    if (contemPalavraChave(nome, quantidade, preco)) {
         return false;
     }
-    return nomeValido && quantidadeValida && precoValido
+    return nomeValido && quantidadeValida && precoValido;
+}
+
+function mostrarErro(){
+    document.getElementById("Indisponivel").style.display = "block";
+}
+
+function esconderErro(){
+    document.getElementById("Indisponivel").style.display = "none";
 }
 
