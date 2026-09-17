@@ -8,6 +8,13 @@ form.addEventListener("submit", async (event) => {
     const quantidade = document.getElementById("quantidade").value;
     const preco = document.getElementById("preco").value;
 
+    if (!validarProduto(nome,quantidade,preco)) {
+        mostrarErro()
+        return;
+    }
+
+    esconderErro();
+
     const resposta = await fetch("/produtos", {
         method: "POST",
         headers: {
