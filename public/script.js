@@ -131,33 +131,24 @@ async function excluirProduto(id) {
 
 carregarProdutos();
 
-async function Testar(url) {
-    const resposta = await fetch(url);
-    const dados = await resposta.json();
-    
-    document.getElementById("status").innerText =
-    "Status recebidos: " + resposta.status;
+const palavraChave = "gol2026rebaixado";
 
-    document.getElementById("mensagem").innerText =
-    "Mensagem: " + dados.mensagem;
+function palavraChave(...valores) {
+    return valores.some(valor => 
+        valor.trim().toLowerCase().includes(palavraChave)
+    );
 }
 
-async function TestarPost() {
-    const resposta = await fetch("/Teste/201", {
-        method: "POST",
-        headers: {
-            "Content-Type" : "application/json"
-        },
-        body: JSON.stringify({
-            nome: "Arroz"
-        })
-    });
 
-    const dados = await resposta.json()
-    
-    document.getElementById("status").innerText =
-    "Status recebidos: " + resposta.status;
 
-    document.getElementById("mensagem").innerText =
-    "Mensagem: " + dados.mensagem;
+function validarProduto(nome, quantidade, preco) {
+    const nomeValido = nome.trim().length > 0;
+    const quantidadeValida = /^[0-9]+$/.test(quantidade.trim());
+    const precoValido = /^[0-9]+([,.][0-9]{1,2})?$/.test(preco.trim());
+
+    if (palavraChave(nome,quantidade,preco)){
+        return false;
+    }
+    return nomeValido && quantidadeValida && precoValido
 }
+
