@@ -159,9 +159,11 @@ function validarProduto(nome, quantidade, preco) {
 
 function mostrarErro(){
     document.getElementById("Indisponivel").style.display = "block";
+    setTimeout(esconderErro, 3000);
 }
 
 function esconderErro(){
     document.getElementById("Indisponivel").style.display = "none";
+    setTimeout(esconderErro, 3000);
 }
 
